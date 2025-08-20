@@ -11,7 +11,10 @@ app.get('/', (req, res) => {
     timestamp: new Date().toLocaleTimeString(),
   })
 })
+
 app.use('/api/todos', todoRoutes)
+
+
 app.listen(3000, () => {
   console.log('Server is running on http://localhost:3000')
 })

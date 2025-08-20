@@ -55,4 +55,3 @@ export const marTo = [
 
 ];
 
-export default todos

@@ -1,9 +1,14 @@
-// import {todos, teddy, sodot, doTo,marTo } from '../database/index.js';
+
 import * as todosService from '../services/todos.services.js';
 
 export const getTodos = (req, res) => {
   const todos = todosService.getTodos()
   res.json(todos)
+}
+
+export const getTeddys = (req, res)=> {
+  const teddys = todosService.getTeddy()
+  res.json(teddys)
 }
 
 
@@ -19,66 +24,53 @@ const {title, description} = req.body;
   res.status(201).json(newTodo)
 }
 
+export const createTeddys = (req, res) => {
+const {name, work} = req.body;
+  const newTeddys = todosService.createTeddy(name, work);
+  if(!newTeddys) {
+    return res.status(400).json({
+      message:'name and work are required'
+    })
+  }
+
+  res.status(201).json(newTeddys)
+}
+
+export const getTodo = (req, res) => {
+  const {id} = req.params;
+  const todo = todosService.getTodo(id);
+
+  if(!todo) {
+    return res.status(404).json({message: 'Todo not found'})
+  }
+
+  res.json(todo)
+}
 
 
-// export const createTodos = (req, res) => {
-//   const {title, description} = req.body
-//   let newItem = {
-//     title: title,
-//     description: description
-//   }
-//   todos.push(newItem);
-//     res.json({
-//       message:'new item created',
-//       time: new Date().toLocaleTimeString()
-//     });
-// };
+export const updateTodo = (req, res)=> {
+  const {id} =req.params;
+  const {title, description, completed}= req.body;
+  const todo = todosService.updateTodo(id, title, description, completed);
+
+  if(!todo) {
+    return res.status(404).json({message: "todo not found"})
+  }
+  res.json(todo);
+}
+
+export const deleteTodo = (req, res) => {
+  const {id} = req.params;
+  const {title, description, completed}= req.body;
+  const todo = todosService.deleteTodo(id, title, completed, description);
+
+  if(!todo) {
+    return res.status(404).json({message: "todo doesnt not exist"})
+  }
+
+  res.json(todo);
+}
 
 
-// export const createTeddy = (req, res) => {
-//   const a = { name: 'Temmy', Work: 'Dev', Age: 23 };
-//   const b = { name: 'Tope', Work: 'Devel', Age: 25 };
-//   const fill = [a,b]
-//   teddy.push(fill)
-// res.json({
-//   a: fill,
-//   b: `The first participant name is ${b.name} and his details are as follows: Speciality: ${b.Work} age: ${b.Age}`,
-//   c: `The Second participant name is ${a.name} and his details are as follows: Speciality: ${a.Work} age: ${a.Age}`,
-// })
-// };
 
 
-// export const createSodo = (req, res)=> {
-//   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-//   const day =  days[new Date().getDay()];
-//   const time = new Date().toLocaleDateString()
-//   let date = 
-//    {
-//      day: day,
-//      Date: time,
-//    }
-//  sodot.push(date);
-
-//  res.json({
-//    words: `The date for today is ${time} and the day of the weeek as of today is ${day}`
-//  })
-// }
-
-// export const createDot = (req, res)=> {
-//   const Timer = Math.floor(Math.random() * 100000)
-//   const encoded= btoa('Welcome back guest')
-//   const decode= atob(encoded)
-
-//   let code = {
-//     coded:encoded,
-//     meaning:decode
-//   }
-
-//   doTo.push(code)
-//   res.json({
-//     SessionCode:`Your session code is ${Timer}`,
-//     PassCode: encoded,
-//     reveal: decode,
-   
-//   })
-// }
