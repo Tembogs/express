@@ -60,17 +60,16 @@ export const updateTodo = (req, res)=> {
 }
 
 export const deleteTodo = (req, res) => {
-  const {id} = req.params;
-  const {title, description, completed}= req.body;
-  const todo = todosService.deleteTodo(id, title, completed, description);
+  const { id } = req.params;
 
-  if(!todo) {
-    return res.status(404).json({message: "todo doesnt not exist"})
+  const todo = todosService.deleteTodo(id);
+
+  if (!todo) {
+    return res.status(404).json({ message: "Todo does not exist" });
   }
 
-  res.json(todo);
-}
-
+  res.json({ message: "Todo deleted successfully", todo });
+};
 
 
 

@@ -6,8 +6,6 @@ return todos
 }
 
 
-
-
 // export const getSodoT = (req, res) => {
 //   res.json(sodot)
 // };
@@ -56,9 +54,9 @@ export const updateTodo = (id, title, description, completed) => {
   const index = fill.todos.findIndex((todo) => todo.id === parseInt(id));
 
   if (index === -1) {
-    return null;}
+    return null}
   fill.todos.splice(index, 1);
-  return 'action completed';
+  return 'Todo deleted successfully';
   }
 
 
